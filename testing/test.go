@@ -15,7 +15,7 @@ import (
 )
 
 func main() {
-	imgFile, err := os.Open("certificate.jpeg")
+	imgFile, err := os.Open("./certificate.jpeg")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -49,16 +49,16 @@ func main() {
 	c.SetDst(rgba)
 	c.SetSrc(image.Black)
 
-	// name
-	c.SetFontSize(40)
-	_, err = c.DrawString("john doe", freetype.Pt(400, 300))
+	c.SetFont(f)
+	c.SetFontSize(100)
+	_, err = c.DrawString("Joe Mama", freetype.Pt(1250, 800))
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	// link
-	c.SetFontSize(20)
-	_, err = c.DrawString("certisure.com/credentials/123456", freetype.Pt(300, 400))
+	c.SetFont(f)
+	c.SetFontSize(80)
+	_, err = c.DrawString("https://certisure.vercel.app/credential/123456", freetype.Pt(1250, 2300))
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -68,11 +68,11 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	qr, err = barcode.Scale(qr, 200, 200)
+	qr, err = barcode.Scale(qr, 300, 300)
 	if err != nil {
 		log.Fatal(err)
 	}
-	draw.Draw(rgba, image.Rect(50, 50, 250, 250), qr, image.Point{}, draw.Over)
+	draw.Draw(rgba, image.Rect(1050, 1900, 1350, 2200), qr, image.Point{}, draw.Over)
 
 	outFile, err := os.Create("certificate_new.jpg")
 	if err != nil {
