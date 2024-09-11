@@ -1,10 +1,12 @@
-package datastore
+package main
 
 import (
 	"context"
+	"fmt"
 	"time"
 
 	"github.com/sarthak0714/certisure-go/internal/models"
+	"github.com/sarthak0714/certisure-go/internal/store"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 )
@@ -74,4 +76,18 @@ func (datastore *MongoCertificateDatastore) Delete(id string) error {
 		return err
 	}
 	return nil
+}
+
+func main() {
+	db, err := store.NewMongoDB("mongodb+srv://abc:abc@certisure.iyvijgl.mongodb.net/certisure")
+	if err != nil {
+		fmt.Println("Failed to connect to MongoDB:", err)
+		return
+	}
+	certstore := NewMongoCertificateDatastore(db)
+
+	cert, _ := certstore.GetByGroup("c3cc1e25-bdde-44b0-b37a-84330bdd0006")
+	for _, c := range cert {
+		fmt.Printf("%v\n", c)
+	}
 }
