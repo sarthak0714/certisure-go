@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"fmt"
+	"os"
 	"time"
 
 	"github.com/sarthak0714/certisure-go/internal/models"
@@ -78,8 +79,12 @@ func (datastore *MongoCertificateDatastore) Delete(id string) error {
 	return nil
 }
 
+func getMongoURI() string {
+	return os.Getenv("MONGO_URI")
+}
+
 func main() {
-	db, err := store.NewMongoDB("mongodb+srv://abc:abc@certisure.iyvijgl.mongodb.net/certisure")
+	db, err := store.NewMongoDB(getMongoURI())
 	if err != nil {
 		fmt.Println("Failed to connect to MongoDB:", err)
 		return
