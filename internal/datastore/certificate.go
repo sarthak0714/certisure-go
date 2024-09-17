@@ -6,7 +6,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/sarthak0714/certisure-go/internal/models"
+	"github.com/sarthak0714/certisure-go/internal/core/domain"
 	"github.com/sarthak0714/certisure-go/internal/store"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
